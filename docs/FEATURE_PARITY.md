@@ -14,6 +14,7 @@ This document is to keep track of the feature parity between the iOS and Android
 | Unsubscribe from topic                | :white_check_mark: | :white_check_mark: |
 | Delete notifications                  | :white_check_mark: | :white_check_mark: |
 | Notification priority                 | :warning:          | :white_check_mark: | No priority filtering                                                                                         |
+| Focus filters                         | :white_check_mark: | :x:                | iOS 16+: choose per Focus which servers/topics may alert (Settings -> Focus -> Focus Filters)                 |
 | Tags and emojis                       | :white_check_mark: | :white_check_mark: |
 | Click action                          | :warning:          | :white_check_mark: | Only direct notification click                                                                                |
 | Attachments                           | :warning:          | :white_check_mark: | Not fully implemented                                                                                         |

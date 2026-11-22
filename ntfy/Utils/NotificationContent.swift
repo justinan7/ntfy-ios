@@ -69,6 +69,12 @@ extension UNMutableNotificationContent {
             self.relevanceScore = 0.5
         }
         
+        // Let the system filter this notification per Focus, if the user has configured a Focus filter for ntfy
+        // (Settings -> Focus -> [Focus] -> Focus Filters). See FocusFilterCriteria and NotificationFocusFilter.
+        if #available(iOS 16.0, *) {
+            self.filterCriteria = FocusFilterCriteria.criteria(baseUrl: baseUrl, topic: message.topic, priority: message.priority)
+        }
+
         // Make sure the userInfo matches, so that when the notification is tapped, the AppDelegate
         // can properly navigate to the right topic and re-assemble the message.
         self.userInfo = message.toUserInfo()
