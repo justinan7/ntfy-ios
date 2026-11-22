@@ -48,6 +48,7 @@
 		9474F2062831D73C00CDE4DD /* ntfy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9474F1F52830830700CDE4DD /* ntfy.xcdatamodeld */; };
 		9474F20C283321C300CDE4DD /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F20B283321C300CDE4DD /* Notification.swift */; };
 		9474F20F283326C500CDE4DD /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F20E283326C500CDE4DD /* ApiService.swift */; };
+		B9AC1FB86FD49B23B8AD770E /* SendNotificationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49480ADEAEDCBA3FB269271F /* SendNotificationIntent.swift */; };
 		9474F212283327C200CDE4DD /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F211283327C200CDE4DD /* Helpers.swift */; };
 		9474F2132834755A00CDE4DD /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F20B283321C300CDE4DD /* Notification.swift */; };
 		9474F2142834755E00CDE4DD /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F1FE28316ACE00CDE4DD /* Subscription.swift */; };
@@ -136,6 +137,7 @@
 		9474F2042831CDBF00CDE4DD /* ntfyNSE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ntfyNSE.entitlements; sourceTree = "<group>"; };
 		9474F20B283321C300CDE4DD /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		9474F20E283326C500CDE4DD /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		49480ADEAEDCBA3FB269271F /* SendNotificationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNotificationIntent.swift; sourceTree = "<group>"; };
 		9474F211283327C200CDE4DD /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		9474F216283531A200CDE4DD /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		94867142283EC9950093C7A4 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				9474F20E283326C500CDE4DD /* ApiService.swift */,
+				49480ADEAEDCBA3FB269271F /* SendNotificationIntent.swift */,
 				94CD1969283E666900973B93 /* EmojiManager.swift */,
 				9474F211283327C200CDE4DD /* Helpers.swift */,
 				94A3F7C928386B2100C48E79 /* Config.swift */,
@@ -468,6 +471,7 @@
 				9474F1C1282F2AA700CDE4DD /* AppMain.swift in Sources */,
 				94867143283EC9960093C7A4 /* Actions.swift in Sources */,
 				9474F20F283326C500CDE4DD /* ApiService.swift in Sources */,
+				B9AC1FB86FD49B23B8AD770E /* SendNotificationIntent.swift in Sources */,
 				94B736D7284AF9BE003D69FB /* MainView.swift in Sources */,
 				9474F1F72830830700CDE4DD /* ntfy.xcdatamodeld in Sources */,
 				29E841A52FB417EA00F927E4 /* NotificationAttachmentController.swift in Sources */,

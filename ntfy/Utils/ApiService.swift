@@ -81,6 +81,46 @@ class ApiService {
         }.resume()
     }
     
+    /// Publishes a message and reports failures to the caller. This is used by the "Send Notification" Shortcuts action
+    /// (see SendNotificationIntent), which must be able to tell the user when publishing did not work.
+    ///
+    /// This uses the JSON publishing API (https://docs.ntfy.sh/publish/#publish-as-json), so that titles and tags
+    /// with non-ASCII characters do not have to be encoded into HTTP headers.
+    func publish(baseUrl: String, topic: String, user: BasicUser?, message: String, title: String?, priority: Int, tags: [String]) async throws {
+        guard !topic.isEmpty, let url = URL(string: normalizeBaseUrl(baseUrl)) else {
+            throw PublishError.invalidTopic
+        }
+        var body: [String: Any] = [
+            "topic": topic,
+            "message": message,
+            "priority": priority
+        ]
+        if let title = title, !title.isEmpty {
+            body["title"] = title
+        }
+        if !tags.isEmpty {
+            body["tags"] = tags
+        }
+        var request = newRequest(url: url, user: user)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+        Log.d(tag, "Publishing to \(topicUrl(baseUrl: baseUrl, topic: topic)) with user \(user?.username ?? "anonymous")")
+        let (_, response) = try await newSession(timeout: 10).data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw PublishError.unexpectedResponse(0)
+        }
+        switch httpResponse.statusCode {
+        case 200..<300:
+            return
+        case 401, 403:
+            throw PublishError.unauthorized
+        default:
+            throw PublishError.unexpectedResponse(httpResponse.statusCode)
+        }
+    }
+
     func checkAuth(baseUrl: String, topic: String, user: BasicUser?, completionHandler: @escaping(AuthResult) -> Void) {
         guard let url = URL(string: topicAuthUrl(baseUrl: baseUrl, topic: topic)) else { return }
         let request = newRequest(url: url, user: user)
@@ -172,6 +212,23 @@ struct BasicUser {
     
     func toHeader() -> String {
         return "Basic " + String(format: "%@:%@", username, password).data(using: String.Encoding.utf8)!.base64EncodedString()
+    }
+}
+
+enum PublishError: LocalizedError {
+    case invalidTopic
+    case unauthorized
+    case unexpectedResponse(Int)
+
+    var errorDescription: String? {
+        switch self {
+        case .invalidTopic:
+            return "The topic is not valid."
+        case .unauthorized:
+            return "You are not allowed to publish to this topic. Check the user for this server in the ntfy settings."
+        case .unexpectedResponse(let statusCode):
+            return "The server did not accept the message (HTTP \(statusCode))."
+        }
     }
 }
 
